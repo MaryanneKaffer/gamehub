@@ -9,7 +9,7 @@ export default function GameCards({
     onPress: () => void;
     gameName: string;
     gameImage: string;
-    gameIcon: string;
+    gameIcon: string;   
 }) {
     return (
             <Card isFooterBlurred className="w-[500px] h-[300px] col-span-12 sm:col-span-7">

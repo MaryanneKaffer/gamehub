@@ -1,7 +1,7 @@
 import GameHubComponent from './main_components/gameHubComponent'
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
-import TicTacToe from './tictactoeGame/tictactoe.tsx'
+import TicTacToe from './tictactoe_game/tictactoe.tsx'
 
 function App() {
   return (
