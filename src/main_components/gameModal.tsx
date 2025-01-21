@@ -7,7 +7,7 @@ export default function GameModal({
     isOpen,
     onOpenChange
 }: {
-    resetGame: () => void;
+    resetGame: () => any
     winNotif: React.ReactNode;
     isOpen: boolean;
     onOpenChange: (isOpen: boolean) => void;
@@ -15,7 +15,7 @@ export default function GameModal({
     const navigate = useNavigate();
 
     return (
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false} isKeyboardDismissDisabled={true}>
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false} isKeyboardDismissDisabled={true} hideCloseButton={true}>
             <ModalContent>
                 <ModalHeader className="m-3"></ModalHeader>
                 <ModalBody>

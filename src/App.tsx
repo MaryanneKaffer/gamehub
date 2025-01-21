@@ -2,13 +2,14 @@ import GameHubComponent from './main_components/gameHubComponent'
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import TicTacToe from './tictactoe_game/tictactoe.tsx'
-
+import MatchingCardGame from './matchingcard_game/matchingCardGame.tsx'
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<GameHubComponent />} />
-        <Route path="/Tic-Tac-Toe-Game" element={<TicTacToe />} />
+        <Route path="/tic-tac-toe-game" element={<TicTacToe />} />
+        <Route path="/matching-card-game" element={<MatchingCardGame/>} />
       </Routes>
     </>
   )

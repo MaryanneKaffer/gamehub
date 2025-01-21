@@ -12,7 +12,7 @@ export default function TicTacToeComponent() {
 
   useEffect(() => {
     if (winner) {
-      setShowConfetti(true);
+      setShowConfetti(winner !== 'Tie');
       onOpenChange();
     }
   }, [winner]);
