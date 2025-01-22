@@ -6,6 +6,9 @@ import TicTacToeImage from "../assets/tictactoe_image.png"
 import TicTacToeIcon from "../assets/tictactoe_icon.png"
 import CardGameImage from "../assets/cardgame_image.png"
 import CardGameIcon from "../assets/cardgame_icon.png"
+import GuessTheNumberIcon from "../assets/guessthenumber_icon.png"
+import GuessTheNumberImage from "../assets/guessthenumber_image.png"
+
 export default function GameHubComponent() {
     const navigate = useNavigate();
     return (
@@ -20,15 +23,15 @@ export default function GameHubComponent() {
                 />
                 <GameCards
                     onPress={() => navigate("/matching-card-game")}
-                    gameName="Tic Tac Toe"
+                    gameName="Matching Card Game"
                     gameImage={CardGameImage}
                     gameIcon={CardGameIcon}
                 />
                 <GameCards
-                    onPress={() => navigate("/matching-card-game")}
-                    gameName="Tic Tac Toe"
-                    gameImage="https://static-00.iconduck.com/assets.00/tic-tac-toe-icon-2048x2048-g58f0u84.png"
-                    gameIcon="https://static-00.iconduck.com/assets.00/tic-tac-toe-icon-2048x2048-g58f0u84.png"
+                    onPress={() => navigate("/guess-the-number-game")}
+                    gameName="Guess The Number"
+                    gameImage={GuessTheNumberImage}
+                    gameIcon={GuessTheNumberIcon}
                 />
             </div>
         </body>

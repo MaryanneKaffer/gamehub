@@ -10,7 +10,7 @@ export default {
     extend: {
       colors: {
         darkblue: '#01001F',
-        darkpurple: '#221539',
+        darkred: '#2E0605',
         darkgreen: '#1A3915',
         darkgray: '#353e43'
       }

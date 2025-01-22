@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
-import Confetti from "react-confetti";  // Importando confete
 import GameModal from "../../main_components/gameModal";
-import CardBoard from "./cardBoard";
 import { useDisclosure } from "@heroui/react";
 import card1 from "../card_icons/card_1.png";
 import card2 from "../card_icons/card_2.png";
 import card3 from "../card_icons/card_3.png";
 import card4 from "../card_icons/card_4.png";
 import card5 from "../card_icons/card_5.png";
-
+import { useEffect, useState } from "react";
+import Confetti from "react-confetti"; 
+import CardBoard from "./cardBoard";
 
 const cardImages = [card1, card2, card3, card4, card5];
 const shuffledCards = [...cardImages, ...cardImages].sort(() => Math.random() - 0.5);
@@ -22,13 +21,12 @@ export default function MatchingCardGameComponent() {
     const { isOpen, onOpenChange } = useDisclosure();
 
     const resetGame = () => {
-        setRevealed(new Array(10).fill(false));  // Reinicia o estado de cartas reveladas
-        setFirstSelection(null);  // Zera a primeira seleção
-        setSecondSelection(null);  // Zera a segunda seleção
-        setGameOver(false);  // Define o estado de fim de jogo como falso
-        setShowConfetti(false);  // Para o confete
+        setRevealed(new Array(10).fill(false)); 
+        setFirstSelection(null); 
+        setSecondSelection(null); 
+        setGameOver(false); 
+        setShowConfetti(false);  
         onOpenChange();
-        // Embaralha as cartas novamente
         shuffledCards.sort(() => Math.random() - 0.5);
     };
     
@@ -43,7 +41,6 @@ export default function MatchingCardGameComponent() {
     return (
         <>
             {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
-
             <CardBoard
                 shuffledCards={shuffledCards}
                 revealed={revealed}
@@ -55,7 +52,7 @@ export default function MatchingCardGameComponent() {
                 setGameOver={setGameOver}
             />
             <GameModal
-                winNotif={gameOver && <h1 className="text-5xl text-center mb-6">Congratulations! You won!</h1>}
+                winNotif={gameOver && <h1 className="text-3xl text-center mb-6 text-success">Congratulations! You won!</h1>}
                 resetGame={resetGame}
                 isOpen={isOpen}
                 onOpenChange={onOpenChange}

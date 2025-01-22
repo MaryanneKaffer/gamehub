@@ -20,6 +20,7 @@ export default function TicTacToeComponent() {
   const handleCellClick = (row: number, col: number) => {
     makeMove(row, col);
   }
+  
   const handleResetGame = () => {
     setShowConfetti(false);
     onOpenChange();
@@ -31,7 +32,7 @@ export default function TicTacToeComponent() {
       {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
       <TicTacToeBoard board={board} onCellClick={handleCellClick} />
       <GameModal
-        winNotif={winner && <div className="result-message text-5xl text-center mb-6">{winner === 'Tie' ? 'Tie!' : `Winner: ${winner}`}</div>}
+        winNotif={winner && <div className="result-message text-5xl text-center mb-6 text-success">{winner === 'Tie' ? 'Tie!' : `Winner: ${winner}`}</div>}
         onOpenChange={onOpenChange}
         resetGame={handleResetGame}
         isOpen={isOpen}

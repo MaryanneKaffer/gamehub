@@ -24,6 +24,23 @@ const CardBoard: React.FC<CardBoardProps> = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isCooldownActive, setIsCooldownActive] = useState(false);
+  const imageCache = useRef<{ [key: string]: HTMLImageElement }>({});
+
+  useEffect(() => {
+    shuffledCards.forEach((card) => {
+      if (!imageCache.current[card]) {
+        const img = new Image();
+        img.src = card;
+        imageCache.current[card] = img;
+      }
+    });
+
+    if (!imageCache.current["back"]) {
+      const backImg = new Image();
+      backImg.src = cardBackImage;
+      imageCache.current["back"] = backImg;
+    }
+  }, [shuffledCards]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -35,7 +52,14 @@ const CardBoard: React.FC<CardBoardProps> = ({
     const cardHeight = 300;
     const padding = 30;
 
-    const drawRoundedRect = (ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, radius: number) => {
+    const drawRoundedRect = (
+      ctx: CanvasRenderingContext2D,
+      x: number,
+      y: number,
+      width: number,
+      height: number,
+      radius: number
+    ) => {
       ctx.beginPath();
       ctx.moveTo(x + radius, y);
       ctx.lineTo(x + width - radius, y);
@@ -58,27 +82,17 @@ const CardBoard: React.FC<CardBoardProps> = ({
         const y = row * (cardHeight + padding);
         const borderRadius = 20;
 
+        ctx.save();
+        drawRoundedRect(ctx, x, y, cardWidth, cardHeight, borderRadius);
+        ctx.clip();
+
         if (revealed[index]) {
-          const img = new Image();
-          img.src = image;
-          img.onload = () => {
-            ctx.save();
-            drawRoundedRect(ctx, x, y, cardWidth, cardHeight, borderRadius);
-            ctx.clip();
-            ctx.drawImage(img, x, y, cardWidth, cardHeight);
-            ctx.restore();
-          };
+          ctx.drawImage(imageCache.current[image], x, y, cardWidth, cardHeight);
         } else {
-          const backImg = new Image();
-          backImg.src = cardBackImage;
-          backImg.onload = () => {
-            ctx.save();
-            drawRoundedRect(ctx, x, y, cardWidth, cardHeight, borderRadius);
-            ctx.clip();
-            ctx.drawImage(backImg, x, y, cardWidth, cardHeight);
-            ctx.restore();
-          };
+          ctx.drawImage(imageCache.current["back"], x, y, cardWidth, cardHeight);
         }
+        
+        ctx.restore();
       });
     };
 
@@ -86,7 +100,7 @@ const CardBoard: React.FC<CardBoardProps> = ({
   }, [revealed, shuffledCards]);
 
   const handleCanvasClick = (event: React.MouseEvent<HTMLCanvasElement>) => {
-    if (isCooldownActive) return; // Bloqueia o clique durante o cooldown
+    if (isCooldownActive) return; 
 
     const rect = canvasRef.current?.getBoundingClientRect();
     if (!rect) return;
@@ -112,14 +126,14 @@ const CardBoard: React.FC<CardBoardProps> = ({
     } else if (secondSelection === null) {
       setSecondSelection(index);
 
-      setIsCooldownActive(true); // Ativa o cooldown
+      setIsCooldownActive(true); 
 
       if (shuffledCards[firstSelection] === shuffledCards[index]) {
         setTimeout(() => {
           setFirstSelection(null);
           setSecondSelection(null);
-          setIsCooldownActive(false); 
-        }, 1000);
+          setIsCooldownActive(false);
+        }, 500);
       } else {
         setTimeout(() => {
           newRevealed[firstSelection] = false;
@@ -127,8 +141,8 @@ const CardBoard: React.FC<CardBoardProps> = ({
           setRevealed([...newRevealed]);
           setFirstSelection(null);
           setSecondSelection(null);
-          setIsCooldownActive(false); 
-        }, 1000);
+          setIsCooldownActive(false);
+        }, 500);
       }
     }
 
@@ -139,6 +153,7 @@ const CardBoard: React.FC<CardBoardProps> = ({
 
   return (
     <canvas
+      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
       ref={canvasRef}
       width={1120}
       height={630}

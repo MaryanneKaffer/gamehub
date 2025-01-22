@@ -21,7 +21,7 @@ export default function GameModal({
                 <ModalBody>
                     {winNotif}
                 </ModalBody>
-                <ModalFooter className="flex justify-center">
+                <ModalFooter className="flex justify-center mb-5">
                     <Button size="lg" radius="full" onPress={() => navigate("/")}>
                         Back to GameHub
                     </Button>
