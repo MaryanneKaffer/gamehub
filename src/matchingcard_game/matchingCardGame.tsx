@@ -1,4 +1,4 @@
-import BackButton from "../main_components/backButon";
+import BackButton from "../main_components/backButton";
 import MatchingCardGameComponent from "./cardgame_components/cardGameComponent";
 export default function MatchingCardGame() {
     

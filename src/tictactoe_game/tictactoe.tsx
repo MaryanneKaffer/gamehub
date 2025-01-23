@@ -1,5 +1,5 @@
 import TicTacToeComponent from "./tictactoeComponents/tictactoeComponent";
-import BackButton from "../main_components/backButon";
+import BackButton from "../main_components/backButton";
 
 export default function TicTacToe() {
     

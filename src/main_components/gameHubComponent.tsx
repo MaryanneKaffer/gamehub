@@ -12,7 +12,7 @@ import GuessTheNumberImage from "../assets/guessthenumber_image.png"
 export default function GameHubComponent() {
     const navigate = useNavigate();
     return (
-        <body className="bg-gradient-to-tr from-darkgreen via-black to-darkgreen h-screen grid justify-center text-center">
+        <div className="bg-gradient-to-tr from-darkgreen via-black to-darkgreen min-h-screen grid justify-center text-center">
             <h1 className="text-3xl mt-5"><img src={GameHubIcon} className="w-10 h-10 inline-block" /> Game Hub <img src={GameHubIcon} className="w-10 h-10 inline-block" /></h1>
             <div className="m-1">
                 <GameCards
@@ -34,6 +34,6 @@ export default function GameHubComponent() {
                     gameIcon={GuessTheNumberIcon}
                 />
             </div>
-        </body>
+        </div>
     );
 }

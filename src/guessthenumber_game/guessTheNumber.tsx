@@ -1,5 +1,5 @@
 import GuessTheNumberComponent from "./guesstenumber_components/guessTheNumberComponent";
-import BackButton from "../main_components/backButon";
+import BackButton from "../main_components/backButton";
 
 export default function GuessTheNumber() {
     return (

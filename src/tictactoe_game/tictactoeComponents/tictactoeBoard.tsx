@@ -80,5 +80,5 @@ export default function TicTacToeBoard({ board, onCellClick }: TicTacToeBoardPro
             onCellClick(Math.floor(y / cellSize), Math.floor(x / cellSize));
         }
     };
-    return <canvas ref={canvasRef} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" onClick={handleClick} />;
+    return <canvas ref={canvasRef} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-sm lg:max-w-[500px] col-span-12 sm:col-span-7" onClick={handleClick} />;
 }

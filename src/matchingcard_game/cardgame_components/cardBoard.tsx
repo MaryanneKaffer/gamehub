@@ -22,27 +22,40 @@ const CardBoard: React.FC<CardBoardProps> = ({
   setSecondSelection,
   setGameOver,
 }) => {
+  
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isCooldownActive, setIsCooldownActive] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   const imageCache = useRef<{ [key: string]: HTMLImageElement }>({});
 
   useEffect(() => {
-    shuffledCards.forEach((card) => {
-      if (!imageCache.current[card]) {
-        const img = new Image();
-        img.src = card;
-        imageCache.current[card] = img;
-      }
-    });
+    const preloadImages = async () => {
+      const loadImage = (src: string) => {
+        return new Promise<HTMLImageElement>((resolve) => {
+          const img = new Image();
+          img.src = src;
+          img.onload = () => resolve(img);
+        });
+      };
 
-    if (!imageCache.current["back"]) {
-      const backImg = new Image();
-      backImg.src = cardBackImage;
-      imageCache.current["back"] = backImg;
-    }
+      const imagePromises = shuffledCards.map((card) => loadImage(card));
+      imagePromises.push(loadImage(cardBackImage)); 
+
+      const loadedImages = await Promise.all(imagePromises);
+      shuffledCards.forEach((card, index) => {
+        imageCache.current[card] = loadedImages[index];
+      });
+      imageCache.current["back"] = loadedImages[loadedImages.length - 1];
+
+      setImagesLoaded(true);
+    };
+
+    preloadImages();
   }, [shuffledCards]);
 
   useEffect(() => {
+    if (!imagesLoaded) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -91,73 +104,82 @@ const CardBoard: React.FC<CardBoardProps> = ({
         } else {
           ctx.drawImage(imageCache.current["back"], x, y, cardWidth, cardHeight);
         }
-        
+
         ctx.restore();
       });
     };
 
     drawBoard();
-  }, [revealed, shuffledCards]);
+  }, [revealed, shuffledCards, imagesLoaded]);
 
   const handleCanvasClick = (event: React.MouseEvent<HTMLCanvasElement>) => {
-    if (isCooldownActive) return; 
+  if (isCooldownActive || !imagesLoaded) return;
 
-    const rect = canvasRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    const clickX = event.clientX - rect.left;
-    const clickY = event.clientY - rect.top;
+  const canvas = canvasRef.current;
+    if (!canvas) return; 
 
-    const cardWidth = 200;
-    const cardHeight = 300;
-    const padding = 30;
+  const rect = canvasRef.current?.getBoundingClientRect();
+  if (!rect) return;
 
-    const col = Math.floor(clickX / (cardWidth + padding));
-    const row = Math.floor(clickY / (cardHeight + padding));
-    const index = row * 5 + col;
+  const scaleX = canvasRef.current.width / rect.width;
+  const scaleY = canvasRef.current.height / rect.height;
 
-    if (revealed[index]) return;
+  const clickX = (event.clientX - rect.left) * scaleX;
+  const clickY = (event.clientY - rect.top) * scaleY;
 
-    const newRevealed = [...revealed];
-    newRevealed[index] = true;
-    setRevealed(newRevealed);
+  const cardWidth = 200;
+  const cardHeight = 300;
+  const padding = 30;
 
-    if (firstSelection === null) {
-      setFirstSelection(index);
-    } else if (secondSelection === null) {
-      setSecondSelection(index);
+  const col = Math.floor(clickX / (cardWidth + padding));
+  const row = Math.floor(clickY / (cardHeight + padding));
+  const index = row * 5 + col;
 
-      setIsCooldownActive(true); 
+  if (revealed[index]) return;
 
-      if (shuffledCards[firstSelection] === shuffledCards[index]) {
-        setTimeout(() => {
-          setFirstSelection(null);
-          setSecondSelection(null);
-          setIsCooldownActive(false);
-        }, 500);
-      } else {
-        setTimeout(() => {
-          newRevealed[firstSelection] = false;
-          newRevealed[index] = false;
-          setRevealed([...newRevealed]);
-          setFirstSelection(null);
-          setSecondSelection(null);
-          setIsCooldownActive(false);
-        }, 500);
-      }
+  const newRevealed = [...revealed];
+  newRevealed[index] = true;
+  setRevealed(newRevealed);
+
+  if (firstSelection === null) {
+    setFirstSelection(index);
+  } else if (secondSelection === null) {
+    setSecondSelection(index);
+
+    setIsCooldownActive(true);
+
+    if (shuffledCards[firstSelection] === shuffledCards[index]) {
+      setTimeout(() => {
+        setFirstSelection(null);
+        setSecondSelection(null);
+        setIsCooldownActive(false);
+      }, 600);
+    } else {
+      setTimeout(() => {
+        newRevealed[firstSelection] = false;
+        newRevealed[index] = false;
+        setRevealed([...newRevealed]);
+        setFirstSelection(null);
+        setSecondSelection(null);
+        setIsCooldownActive(false);
+      }, 600);
     }
+  }
 
-    if (newRevealed.every((revealed) => revealed)) {
-      setGameOver(true);
-    }
-  };
+  if (newRevealed.every((revealed) => revealed)) {
+    setGameOver(true);
+  }
+};
+
+  
 
   return (
     <canvas
-      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-sm lg:max-w-[1120px] col-span-12 sm:col-span-7"
       ref={canvasRef}
       width={1120}
       height={630}
-      style={{ cursor: isCooldownActive ? "default" : "pointer" }}
+      style={{ cursor: isCooldownActive || !imagesLoaded ? "default" : "pointer" }}
       onClick={handleCanvasClick}
     />
   );
