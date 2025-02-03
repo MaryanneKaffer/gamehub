@@ -34,6 +34,29 @@ Feel free to explore the code and provide feedback! 😊
 
 ---
 
+## 🏗️ How to Start the Project
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/GameHub.git
+   cd GameHub
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open the project in your browser:**
+   Navigate to [http://localhost:5173](http://localhost:5173) (or the port shown in the terminal).
+
+---
+
 # 🎮 Enjoy the games and have fun! 🎮
 
 - https://gamehub-687q.vercel.app
