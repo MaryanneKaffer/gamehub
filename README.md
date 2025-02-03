@@ -59,4 +59,4 @@ Feel free to explore the code and provide feedback! 😊
 
 # 🎮 Enjoy the games and have fun! 🎮
 
-- https://gamehub-687q.vercel.app
+- https://gamehub-mu-azure.vercel.app
