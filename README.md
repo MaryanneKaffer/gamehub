@@ -38,7 +38,7 @@ Feel free to explore the code and provide feedback! 😊
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/GameHub.git
+   git clone https://github.com/MaryanneKaffer/gamehub.git
    cd GameHub
    ```
 
