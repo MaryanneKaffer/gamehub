@@ -38,7 +38,7 @@ Feel free to explore the code and provide feedback! 😊
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/GameHub.git
+   git clone https://github.com/MaryanneKaffer/gamehub.git
    cd GameHub
    ```
 
@@ -59,4 +59,4 @@ Feel free to explore the code and provide feedback! 😊
 
 # 🎮 Enjoy the games and have fun! 🎮
 
-- https://gamehub-687q.vercel.app
+- https://gamehub-mu-azure.vercel.app
