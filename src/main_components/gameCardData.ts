@@ -4,32 +4,36 @@ import CardGameImage from "../assets/cardgame_image.png"
 import CardGameIcon from "../assets/cardgame_icon.png"
 import GuessTheNumberIcon from "../assets/guessthenumber_icon.png"
 import GuessTheNumberImage from "../assets/guessthenumber_image.png"
-
+import HangmanIcon from "../assets/hangman_icon.svg"
 const gameCardData = [
     {
         gameName: "Tic Tac Toe",
         gameImage: TicTacToeImage,
+        alt: "Tic-Tac-Toe Image",
         gameIcon: TicTacToeIcon,
         navigate: "/tic-tac-toe-game"
     },
     {
         gameName: "Matching Card Game",
         gameImage: CardGameImage,
+        alt: "Card Game Image",
         gameIcon: CardGameIcon,
         navigate: "/matching-card-game"
     },
     {
         gameName: "Guess The Number",
         gameImage: GuessTheNumberImage,
+        alt: "Card Game Image",
         gameIcon: GuessTheNumberIcon,
         navigate: "/guess-the-number-game"
     },
-    /*{
+    {
         gameName: "Hangman",
-        gameImage: GuessTheNumberImage,
-        gameIcon: GuessTheNumberIcon,
+        gameImage: GuessTheNumberImage, //HangmanImage,
+        alt: "Hangman Image",
+        gameIcon: HangmanIcon,
         navigate: "/hangman-game"
-    }*/
+    }
 ]
 
 export default gameCardData

@@ -8,13 +8,14 @@ export default function GameHubComponent() {
     return (
         <div className="bg-gradient-to-tr from-darkgreen via-black to-darkgreen min-h-screen grid justify-center text-center">
             <h1 className="text-3xl mt-5"><img src={GameHubIcon} className="w-10 h-10 inline-block" /> Game Hub <img src={GameHubIcon} className="w-10 h-10 inline-block" /></h1>
-            <div className="m-1">
+            <div className="m-1 lg:grid grid-cols-2 sm:flex">
                 {gameCardData.map((item) =>
                 <GameCards
                     onPress={() => navigate(item.navigate)}
                     gameName={item.gameName}
                     gameImage={item.gameImage}
                     gameIcon={item.gameIcon}
+                    alt={item.alt}
                 />)}
             </div>
         </div>
