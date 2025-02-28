@@ -19,7 +19,7 @@ export default function GameCards({
                 <Image
                     removeWrapper
                     alt={alt}
-                    className="w-[450px] lg:h-full sm:h-[210px]"
+                    className="w-[450px] lg:h-[210px] xl:h-auto "
                     src={gameImage}
                 />
                 <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">

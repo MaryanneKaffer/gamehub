@@ -1,6 +1,6 @@
 export default function Gallow({ tries }: { tries: number }) {
     return (
-        <div><svg
+        <svg
             width="150"
             height="150"
             viewBox="0 0 150 150"
@@ -23,7 +23,5 @@ export default function Gallow({ tries }: { tries: number }) {
             {tries <= 2 && <line x1="100" y1="90" x2="90" y2="110" />}
             {tries <= 1 && <line x1="100" y1="90" x2="110" y2="110" />}
         </svg>
-
-        </div>
     )
 }

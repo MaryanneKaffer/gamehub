@@ -5,6 +5,8 @@ import CardGameIcon from "../assets/cardgame_icon.png"
 import GuessTheNumberIcon from "../assets/guessthenumber_icon.png"
 import GuessTheNumberImage from "../assets/guessthenumber_image.png"
 import HangmanIcon from "../assets/hangman_icon.svg"
+import HangmanImage from "../assets/hangman_image.png"
+
 const gameCardData = [
     {
         gameName: "Tic Tac Toe",
@@ -29,7 +31,7 @@ const gameCardData = [
     },
     {
         gameName: "Hangman",
-        gameImage: GuessTheNumberImage, //HangmanImage,
+        gameImage: HangmanImage,
         alt: "Hangman Image",
         gameIcon: HangmanIcon,
         navigate: "/hangman-game"

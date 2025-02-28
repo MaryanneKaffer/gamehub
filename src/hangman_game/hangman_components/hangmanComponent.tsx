@@ -60,7 +60,22 @@ export default function HangmanComponent() {
 
         setLetterValue("");
         setWordValue("");
+        console.log(displayWord.join(""));
     };
+    useEffect(() => {
+        if (randomWord && displayWord.join("") === randomWord && !isOpen) {
+            onOpenChange();
+            setShowConfetti(true);
+        }
+    }, [displayWord, randomWord, onOpenChange]);
+    
+
+    useEffect(() => {
+        if (tries === 0 && !isOpen) {
+            onOpenChange();
+        }
+        return
+    }, [tries, onOpenChange]);
 
     const resetGame = () => {
         getRandomWord();
@@ -72,17 +87,18 @@ export default function HangmanComponent() {
         setTries(10);
     };
 
+
     return (
         <div>
             {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
-            <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <div className="flex items-center gap-8 mb-5 relative">
+            <div className="justify-items-center items-center">
+                <div className="flex gap-8 mb-5 relative">
                     <Gallow tries={tries} />
-                    <div className="flex gap-3">
+                    <div className="flex gap-3 mb-[5px]">
                         {displayWord.map((letter, index) => (
                             <span
                                 key={index}
-                                className="w-10 text-6xl text-center border-b-5 border-white flex items-center justify-center min-w-[40px] min-h-[60px]"
+                                className="w-10 items-center justify-center text-6xl border-b-[5px] border-white flex mb-[2px]"
                             >
                                 {letter !== "_" ? letter : ""}
                             </span>
@@ -90,8 +106,8 @@ export default function HangmanComponent() {
                     </div>
                 </div>
 
-                <p className="mb-6 text-2xl text-white text-center w-[400px]">{tries} tries left</p>
-                <h1 className="text-2xl mb-2">{message}</h1>
+                <p className="my-8 text-2xl text-white text-center w-[400px]">{tries} tries left</p>
+                <h1 className="text-2xl mb-5">{message}</h1>
 
                 <Input
                     label="Guess the letter"
@@ -102,12 +118,12 @@ export default function HangmanComponent() {
                         }
                     }}
                     value={letterValue}
-                    onChange={(e) => setLetterValue(e.target.value)}
+                    onChange={(e) => setLetterValue(e.target.value.slice(0, 1))}
                 />
 
                 <Input
                     label="Guess the word"
-                    className="w-[400px]"
+                    className="w-[400px] mb-5"
                     onKeyDown={(e) => {
                         if (/\d/.test(e.key)) {
                             e.preventDefault();
@@ -120,15 +136,17 @@ export default function HangmanComponent() {
                 <Button className="mt-2" color="primary" variant="flat" onPress={handleGuess}>
                     Guess
                 </Button>
-                {tries <= 3 ? <h1 className="text-2xl mt-2">{hint}!!</h1> : ""}
+                {tries <= 3 ? <h1 className="text-2xl mt-5">{hint}!!</h1> : ""}
             </div>
 
             <GameModal
                 isOpen={isOpen}
                 onOpenChange={onOpenChange}
                 winNotif={
-                    <><h1 className="text-6xl text-center">{randomWord?.toUpperCase()}</h1>
-                        <p className="mb-6 text-2xl text-center text-success">🎉 You guessed the word correctly!</p></>
+                    <>
+                        {tries === 0 ? <div className="justify-items-center"><Gallow tries={tries}/> <h1 className="text-6xl text-center">{randomWord?.toUpperCase()}</h1></div> : <h1 className="text-6xl text-center">{randomWord?.toUpperCase()}</h1>}
+                        {tries === 0 ? <p className="mb-6 text-2xl text-center text-danger">You lose!</p> : <p className="mb-6 text-2xl text-center text-success">🎉 You guessed the word correctly!</p>}
+                    </>
                 }
                 resetGame={resetGame}
             />
