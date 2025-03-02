@@ -1,9 +1,10 @@
 import GameModal from "../../main_components/gameModal";
-import { Button, Input, useDisclosure } from "@heroui/react";
+import { Button, useDisclosure } from "@heroui/react";
 import { useEffect, useState } from "react";
 import Confetti from "react-confetti";
 import Gallow from "./gallow";
 import { getRandomWord, HandleGuess, clean } from "./hangmanLogic";
+import { LetterInput, WordInput } from "./input";
 
 export default function HangmanComponent() {
     const [letterValue, setLetterValue] = useState("");
@@ -60,33 +61,11 @@ export default function HangmanComponent() {
                 <h1 className="text-2xl mb-5">{message}</h1>
 
                 <section>
-                    <Input
-                        label="Guess the letter"
-                        className="w-[400px] mb-5"
-                        onKeyDown={(e) => {
-                            if (/\d/.test(e.key)) {
-                                e.preventDefault();
-                            }
-                        }}
-                        value={letterValue}
-                        onChange={(e) => setLetterValue(e.target.value.slice(0, 1))}
-                    />
+                    <LetterInput value={letterValue} setValue={setLetterValue} />
+                    <WordInput value={wordValue} setValue={setWordValue} />
 
-                    <Input
-                        label="Guess the word"
-                        className="w-[400px] mb-5"
-                        onKeyDown={(e) => {
-                            if (/\d/.test(e.key)) {
-                                e.preventDefault();
-                            }
-                        }}
-                        value={wordValue}
-                        onChange={(e) => setWordValue(e.target.value)}
-                    />
+                    <Button className="mt-2" color="primary" variant="flat" onPress={handleGuess}>Guess</Button>
 
-                    <Button className="mt-2" color="primary" variant="flat" onPress={handleGuess}>
-                        Guess
-                    </Button>
                     {tries <= 3 ? <h1 className="text-2xl mt-5">{hint}!!</h1> : ""}
                 </section>
             </div>

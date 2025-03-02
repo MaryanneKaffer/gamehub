@@ -20,7 +20,7 @@ export default function TicTacToeComponent() {
   const handleCellClick = (row: number, col: number) => {
     makeMove(row, col);
   }
-  
+
   const handleResetGame = () => {
     setShowConfetti(false);
     onOpenChange();
