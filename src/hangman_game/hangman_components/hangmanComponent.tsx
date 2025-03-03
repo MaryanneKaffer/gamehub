@@ -40,10 +40,10 @@ export default function HangmanComponent() {
     };
 
     return (
-        <div>
+        <body className="md:padding-[200px]">
             {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
             <div className="justify-items-center items-center">
-                <section className="flex gap-8 mb-5 relative">
+                <section className="lg:flex md:grid gap-8 mb-5 justify-items-center md:">
                     <Gallow tries={tries} />
                     <div className="flex gap-3 mb-[7px]">
                         {displayWord.map((letter, index) => (
@@ -58,11 +58,11 @@ export default function HangmanComponent() {
                 </section>
 
                 <p className="my-8 text-2xl text-white text-center w-[400px]">{tries} tries left</p>
-                <h1 className="text-2xl mb-5">{message}</h1>
+                <h1 className="text-2xl mb-5 text-lg lg:text-2xl">{message}</h1>
 
                 <section>
-                    <LetterInput value={letterValue} setValue={setLetterValue} />
-                    <WordInput value={wordValue} setValue={setWordValue} />
+                    <LetterInput value={letterValue} setValue={setLetterValue} onSubmit={handleGuess} />
+                    <WordInput value={wordValue} setValue={setWordValue} onSubmit={handleGuess} />
 
                     <Button className="mt-2" color="primary" variant="flat" onPress={handleGuess}>Guess</Button>
 
@@ -75,12 +75,12 @@ export default function HangmanComponent() {
                 onOpenChange={onOpenChange}
                 winNotif={
                     <>
-                        {tries === 0 ? <div className="justify-items-center"><Gallow tries={tries} /> <h1 className="text-6xl text-center">{randomWord?.toUpperCase()}</h1></div> : <h1 className="text-6xl text-center">{randomWord?.toUpperCase()}</h1>}
-                        {tries === 0 ? <p className="mb-6 text-2xl text-center text-danger">You lose!</p> : <p className="mb-6 text-2xl text-center text-success">🎉 You guessed the word correctly!</p>}
+                        {tries === 0 ? <div className="justify-items-center"><Gallow tries={tries} /> <h1 className="text-6xl text-center">{randomWord?.toUpperCase()}</h1></div> : <h1 className="text-6xl text-center">🎊{randomWord?.toUpperCase()}🎊</h1>}
+                        {tries === 0 ? <p className="mb-6 text-2xl text-center text-danger">You lose!</p> : <p className="mb-6 text-2xl text-center text-success">You guessed the word correctly!</p>}
                     </>
                 }
                 resetGame={resetGame}
             />
-        </div>
+        </body>
     );
 }
