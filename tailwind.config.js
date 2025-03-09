@@ -13,7 +13,8 @@ export default {
         darkred: '#2E0605',
         darkgreen: '#1A3915',
         darkgray: '#353e43',
-        darkmagenta: '#180018'
+        darkmagenta: '#180018',
+        darkorange: '#421d16',
       }
     }
   },
