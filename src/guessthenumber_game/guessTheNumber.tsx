@@ -3,11 +3,11 @@ import BackButton from "../main_components/backButton";
 
 export default function GuessTheNumber() {
     return (
-        <body className="w-screen h-screen bg-gradient-to-tr from-darkblue via-black to-darkblue grid text-center">
+        <section className="h-[100dvh] w-[100dvw] bg-gradient-to-tr from-darkblue via-black to-darkblue flex flex-col text-center">
             <p className="text-3xl mt-5 justify-center">Guess The Number</p>
-            <p className="text-2xl justify-center mb-96">Guess the number between 1 and 100</p>
+            <p className="text-xl mt-[20%] justify-center">Guess the number between 1 and 100</p>
             <GuessTheNumberComponent />
             <BackButton />
-        </body>
+        </section>
     );
 }

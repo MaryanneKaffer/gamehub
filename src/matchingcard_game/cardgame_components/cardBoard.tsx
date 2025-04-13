@@ -22,7 +22,7 @@ const CardBoard: React.FC<CardBoardProps> = ({
   setSecondSelection,
   setGameOver,
 }) => {
-  
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isCooldownActive, setIsCooldownActive] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -39,7 +39,7 @@ const CardBoard: React.FC<CardBoardProps> = ({
       };
 
       const imagePromises = shuffledCards.map((card) => loadImage(card));
-      imagePromises.push(loadImage(cardBackImage)); 
+      imagePromises.push(loadImage(cardBackImage));
 
       const loadedImages = await Promise.all(imagePromises);
       shuffledCards.forEach((card, index) => {
@@ -113,69 +113,67 @@ const CardBoard: React.FC<CardBoardProps> = ({
   }, [revealed, shuffledCards, imagesLoaded]);
 
   const handleCanvasClick = (event: React.MouseEvent<HTMLCanvasElement>) => {
-  if (isCooldownActive || !imagesLoaded) return;
+    if (isCooldownActive || !imagesLoaded) return;
 
-  const canvas = canvasRef.current;
-    if (!canvas) return; 
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-  const rect = canvasRef.current?.getBoundingClientRect();
-  if (!rect) return;
+    const rect = canvasRef.current?.getBoundingClientRect();
+    if (!rect) return;
 
-  const scaleX = canvasRef.current.width / rect.width;
-  const scaleY = canvasRef.current.height / rect.height;
+    const scaleX = canvasRef.current.width / rect.width;
+    const scaleY = canvasRef.current.height / rect.height;
 
-  const clickX = (event.clientX - rect.left) * scaleX;
-  const clickY = (event.clientY - rect.top) * scaleY;
+    const clickX = (event.clientX - rect.left) * scaleX;
+    const clickY = (event.clientY - rect.top) * scaleY;
 
-  const cardWidth = 200;
-  const cardHeight = 300;
-  const padding = 30;
+    const cardWidth = 200;
+    const cardHeight = 300;
+    const padding = 30;
 
-  const col = Math.floor(clickX / (cardWidth + padding));
-  const row = Math.floor(clickY / (cardHeight + padding));
-  const index = row * 5 + col;
+    const col = Math.floor(clickX / (cardWidth + padding));
+    const row = Math.floor(clickY / (cardHeight + padding));
+    const index = row * 5 + col;
 
-  if (revealed[index]) return;
+    if (revealed[index]) return;
 
-  const newRevealed = [...revealed];
-  newRevealed[index] = true;
-  setRevealed(newRevealed);
+    const newRevealed = [...revealed];
+    newRevealed[index] = true;
+    setRevealed(newRevealed);
 
-  if (firstSelection === null) {
-    setFirstSelection(index);
-  } else if (secondSelection === null) {
-    setSecondSelection(index);
+    if (firstSelection === null) {
+      setFirstSelection(index);
+    } else if (secondSelection === null) {
+      setSecondSelection(index);
 
-    setIsCooldownActive(true);
+      setIsCooldownActive(true);
 
-    if (shuffledCards[firstSelection] === shuffledCards[index]) {
-      setTimeout(() => {
-        setFirstSelection(null);
-        setSecondSelection(null);
-        setIsCooldownActive(false);
-      }, 600);
-    } else {
-      setTimeout(() => {
-        newRevealed[firstSelection] = false;
-        newRevealed[index] = false;
-        setRevealed([...newRevealed]);
-        setFirstSelection(null);
-        setSecondSelection(null);
-        setIsCooldownActive(false);
-      }, 600);
+      if (shuffledCards[firstSelection] === shuffledCards[index]) {
+        setTimeout(() => {
+          setFirstSelection(null);
+          setSecondSelection(null);
+          setIsCooldownActive(false);
+        }, 600);
+      } else {
+        setTimeout(() => {
+          newRevealed[firstSelection] = false;
+          newRevealed[index] = false;
+          setRevealed([...newRevealed]);
+          setFirstSelection(null);
+          setSecondSelection(null);
+          setIsCooldownActive(false);
+        }, 600);
+      }
     }
-  }
 
-  if (newRevealed.every((revealed) => revealed)) {
-    setGameOver(true);
-  }
-};
-
-  
+    if (newRevealed.every((revealed) => revealed)) {
+      setGameOver(true);
+    }
+  };
 
   return (
     <canvas
-      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-sm lg:max-w-[1120px] col-span-12 sm:col-span-7"
+      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-[95dvw] lg:max-w-[1120px] col-span-12 sm:col-span-7"
       ref={canvasRef}
       width={1120}
       height={630}

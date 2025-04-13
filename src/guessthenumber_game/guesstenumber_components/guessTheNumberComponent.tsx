@@ -24,22 +24,24 @@ export default function GuessTheNumberdComponent() {
         <div>
             {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
             <div className="justify-items-center items-center">
-                <p className="mb-6 text-2xl text-white text-center w-[400px]">{message}</p>
-                <h1 className="text-2xl mb-2">Enter your guess</h1>
-                <Input label="Number" className="w-[400px] " value={inputValue} onChange={(e) => setInputValue(e.target.value)}
-                    onKeyDown={(e) => {
-                        if (!/[\d]/.test(e.key) && !["Backspace", "Delete", "Tab", "ArrowLeft", "ArrowRight", "Enter"].includes(e.key)) {
-                            e.preventDefault();
-                        } else if (inputValue.length >= 3 && /\d/.test(e.key)) {
-                            e.preventDefault();
+                <p className="fixed top-[70%] right-[-4%] text-xl text-white w-[400px]">{message}</p>
+                <div className="fixed top-[40%] left-[10%]">
+                    <h1 className="text-2xl mb-2">Enter your guess</h1>
+                    <Input label="Number" className="lg:w-[400px] w-[80dvw]" value={inputValue} onChange={(e) => setInputValue(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (!/[\d]/.test(e.key) && !["Backspace", "Delete", "Tab", "ArrowLeft", "ArrowRight", "Enter"].includes(e.key)) {
+                                e.preventDefault();
+                            } else if (inputValue.length >= 3 && /\d/.test(e.key)) {
+                                e.preventDefault();
+                            }
+                        }}
+                    />
+                    <Button className="mt-2" color="primary" variant="flat" onPress={() => {
+                        if (randomNumber !== null) {
+                            handleGuess(randomNumber, inputValue, setMessage, onOpenChange, setShowConfetti);
                         }
-                    }}
-                />
-                <Button className="mt-2" color="primary" variant="flat" onPress={() => {
-                    if (randomNumber !== null) {
-                        handleGuess(randomNumber, inputValue, setMessage, onOpenChange, setShowConfetti);
-                    }
-                }}>Guess</Button>
+                    }}>Guess</Button>
+                </div>
             </div>
             <GameModal
                 isOpen={isOpen}

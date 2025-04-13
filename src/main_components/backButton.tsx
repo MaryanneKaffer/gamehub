@@ -5,9 +5,9 @@ import { IoIosArrowBack } from "react-icons/io";
 export default function BackButton() {
     const navigate = useNavigate();
     return (
-        <Button className="absolute text-sm bottom-4 left-4 md:w-[200px] md:h-[50px]" radius="full" color="danger" variant="light" onPress={() => navigate("/")}>
+        <Button className="absolute text-sm min-w-[10px] w-[50px] !important bottom-4 h-[30px] left-4 lg:w-[200px] lg:h-[50px]" radius="full" color="danger" variant="flat" onPress={() => navigate("/")}>
             <IoIosArrowBack />
-            <span className="hidden md:block">Back to GameHub</span>
+            <p className="hidden md:block">Back to GameHub</p>
         </Button>
     );
 }
