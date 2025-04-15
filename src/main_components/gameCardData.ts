@@ -35,14 +35,7 @@ const gameCardData = [
         alt: "Hangman Image",
         gameIcon: HangmanIcon,
         navigate: "/hangman-game"
-    },
-    /*{
-        gameName: "Labyrinth",
-        gameImage: HangmanImage,
-        alt: "Labyrinth Image",
-        gameIcon: HangmanIcon,
-        navigate: "/labyrinth-game"
-    }*/
+    }
 ]
 
 export default gameCardData

@@ -9,7 +9,7 @@ export function LetterInput({ value, setValue, onSubmit }: InputProps) {
     return (
         <Input
             label="Guess the letter"
-            className="w-[400px] mb-5"
+            className="lg:w-[400px] w-[80dvw] justify-self-center mb-5"
             onKeyDown={(e) => {
                 if (/\d/.test(e.key)) {
                     e.preventDefault();
@@ -27,7 +27,7 @@ export function WordInput({ value, setValue, onSubmit }: InputProps) {
     return (
         <Input
             label="Guess the word"
-            className="w-[400px] mb-5"
+            className="lg:w-[400px] w-[80dvw] justify-self-center mb-5"
             onKeyDown={(e) => {
                 if (/\d/.test(e.key)) {
                     e.preventDefault();

@@ -15,11 +15,11 @@ export default function GameCards({
 }) {
     return (
         <div className="m-3">
-            <Card isFooterBlurred className="w-full h-[280px]">
+            <Card isFooterBlurred className="w-full lg:w-[500px] h-[280px]">
                 <Image
                     removeWrapper
                     alt={alt}
-                    className="w-[100%] h-[75%] lg:h-[210px] xl:h-auto "
+                    className="w-[100%] h-[75%] lg:h-[100%] object-cover"
                     src={gameImage}
                 />
                 <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">

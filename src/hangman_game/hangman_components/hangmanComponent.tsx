@@ -40,16 +40,18 @@ export default function HangmanComponent() {
     };
 
     return (
-        <body className="md:padding-[200px]">
+        <section>
             {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
             <div className="justify-items-center items-center">
-                <section className="lg:flex md:grid gap-8 mb-5 justify-items-center md:">
-                    <Gallow tries={tries} />
+                <section className="flex flex-col justify-items-center">
+                    <div className="mx-auto lg:mt-16 lg:mb-10">
+                        <Gallow tries={tries} />
+                    </div>
                     <div className="flex gap-3 mb-[7px]">
                         {displayWord.map((letter, index) => (
                             <span
                                 key={index}
-                                className="w-10 items-center justify-center text-6xl border-b-[5px] border-white flex mt-[50px]"
+                                className="lg:w-10 w-8 items-center justify-center text-6xl border-b-[5px] border-white flex mt-[50px]"
                             >
                                 {letter !== "_" ? letter : ""}
                             </span>
@@ -81,6 +83,6 @@ export default function HangmanComponent() {
                 }
                 resetGame={resetGame}
             />
-        </body>
+        </section>
     );
 }
