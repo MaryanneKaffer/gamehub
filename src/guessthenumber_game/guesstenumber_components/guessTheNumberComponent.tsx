@@ -23,9 +23,9 @@ export default function GuessTheNumberdComponent() {
     return (
         <div>
             {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
-            <div className="justify-items-center items-center">
-                <p className="fixed top-[70%] right-[-4%] text-xl text-white w-[400px]">{message}</p>
-                <div className="fixed top-[40%] left-[10%]">
+            <div className="justify-items-center items-center ">
+                <p className="text-xl text-white w-[400px]">{message}</p>
+                <div className="mt-10">
                     <h1 className="text-2xl mb-2">Enter your guess</h1>
                     <Input label="Number" className="lg:w-[400px] w-[80dvw]" value={inputValue} onChange={(e) => setInputValue(e.target.value)}
                         onKeyDown={(e) => {
